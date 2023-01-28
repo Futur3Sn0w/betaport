@@ -1,669 +1,1415 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>(Beta) Portfolio</title><style>
-/* cspell:disable-file */
-/* webkit printing magic: print all background colors */
-html {
-	-webkit-print-color-adjust: exact;
-}
-* {
-	box-sizing: border-box;
-	-webkit-print-color-adjust: exact;
-}
-
-html,
-body {
-	margin: 0;
-	padding: 0;
-}
-@media only screen {
-	body {
-		margin: 2em auto;
-		max-width: 900px;
-		color: rgb(55, 53, 47);
-	}
-}
-
-body {
-	line-height: 1.5;
-	white-space: pre-wrap;
-}
-
-a,
-a.visited {
-	color: inherit;
-	text-decoration: underline;
-}
-
-.pdf-relative-link-path {
-	font-size: 80%;
-	color: #444;
-}
-
-h1,
-h2,
-h3 {
-	letter-spacing: -0.01em;
-	line-height: 1.2;
-	font-weight: 600;
-	margin-bottom: 0;
-}
-
-.page-title {
-	font-size: 2.5rem;
-	font-weight: 700;
-	margin-top: 0;
-	margin-bottom: 0.75em;
-}
-
-h1 {
-	font-size: 1.875rem;
-	margin-top: 1.875rem;
-}
-
-h2 {
-	font-size: 1.5rem;
-	margin-top: 1.5rem;
-}
-
-h3 {
-	font-size: 1.25rem;
-	margin-top: 1.25rem;
-}
-
-.source {
-	border: 1px solid #ddd;
-	border-radius: 3px;
-	padding: 1.5em;
-	word-break: break-all;
-}
-
-.callout {
-	border-radius: 3px;
-	padding: 1rem;
-}
-
-figure {
-	margin: 1.25em 0;
-	page-break-inside: avoid;
-}
-
-figcaption {
-	opacity: 0.5;
-	font-size: 85%;
-	margin-top: 0.5em;
-}
-
-mark {
-	background-color: transparent;
-}
-
-.indented {
-	padding-left: 1.5em;
-}
-
-hr {
-	background: transparent;
-	display: block;
-	width: 100%;
-	height: 1px;
-	visibility: visible;
-	border: none;
-	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
-}
-
-img {
-	max-width: 100%;
-}
-
-@media only print {
-	img {
-		max-height: 100vh;
-		object-fit: contain;
-	}
-}
-
-@page {
-	margin: 1in;
-}
-
-.collection-content {
-	font-size: 0.875rem;
-}
-
-.column-list {
-	display: flex;
-	justify-content: space-between;
-}
-
-.column {
-	padding: 0 1em;
-}
-
-.column:first-child {
-	padding-left: 0;
-}
-
-.column:last-child {
-	padding-right: 0;
-}
-
-.table_of_contents-item {
-	display: block;
-	font-size: 0.875rem;
-	line-height: 1.3;
-	padding: 0.125rem;
-}
-
-.table_of_contents-indent-1 {
-	margin-left: 1.5rem;
-}
-
-.table_of_contents-indent-2 {
-	margin-left: 3rem;
-}
-
-.table_of_contents-indent-3 {
-	margin-left: 4.5rem;
-}
-
-.table_of_contents-link {
-	text-decoration: none;
-	opacity: 0.7;
-	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
-}
-
-table,
-th,
-td {
-	border: 1px solid rgba(55, 53, 47, 0.09);
-	border-collapse: collapse;
-}
-
-table {
-	border-left: none;
-	border-right: none;
-}
-
-th,
-td {
-	font-weight: normal;
-	padding: 0.25em 0.5em;
-	line-height: 1.5;
-	min-height: 1.5em;
-	text-align: left;
-}
-
-th {
-	color: rgba(55, 53, 47, 0.6);
-}
-
-ol,
-ul {
-	margin: 0;
-	margin-block-start: 0.6em;
-	margin-block-end: 0.6em;
-}
-
-li > ol:first-child,
-li > ul:first-child {
-	margin-block-start: 0.6em;
-}
-
-ul > li {
-	list-style: disc;
-}
-
-ul.to-do-list {
-	text-indent: -1.7em;
-}
-
-ul.to-do-list > li {
-	list-style: none;
-}
-
-.to-do-children-checked {
-	text-decoration: line-through;
-	opacity: 0.375;
-}
-
-ul.toggle > li {
-	list-style: none;
-}
-
-ul {
-	padding-inline-start: 1.7em;
-}
-
-ul > li {
-	padding-left: 0.1em;
-}
-
-ol {
-	padding-inline-start: 1.6em;
-}
-
-ol > li {
-	padding-left: 0.2em;
-}
-
-.mono ol {
-	padding-inline-start: 2em;
-}
-
-.mono ol > li {
-	text-indent: -0.4em;
-}
-
-.toggle {
-	padding-inline-start: 0em;
-	list-style-type: none;
-}
-
-/* Indent toggle children */
-.toggle > li > details {
-	padding-left: 1.7em;
-}
-
-.toggle > li > details > summary {
-	margin-left: -1.1em;
-}
-
-.selected-value {
-	display: inline-block;
-	padding: 0 0.5em;
-	background: rgba(206, 205, 202, 0.5);
-	border-radius: 3px;
-	margin-right: 0.5em;
-	margin-top: 0.3em;
-	margin-bottom: 0.3em;
-	white-space: nowrap;
-}
-
-.collection-title {
-	display: inline-block;
-	margin-right: 1em;
-}
-
-.simple-table {
-	margin-top: 1em;
-	font-size: 0.875rem;
-	empty-cells: show;
-}
-.simple-table td {
-	height: 29px;
-	min-width: 120px;
-}
-
-.simple-table th {
-	height: 29px;
-	min-width: 120px;
-}
-
-.simple-table-header-color {
-	background: rgb(247, 246, 243);
-	color: black;
-}
-.simple-table-header {
-	font-weight: 500;
-}
-
-time {
-	opacity: 0.5;
-}
-
-.icon {
-	display: inline-block;
-	max-width: 1.2em;
-	max-height: 1.2em;
-	text-decoration: none;
-	vertical-align: text-bottom;
-	margin-right: 0.5em;
-}
-
-img.icon {
-	border-radius: 3px;
-}
-
-.user-icon {
-	width: 1.5em;
-	height: 1.5em;
-	border-radius: 100%;
-	margin-right: 0.5rem;
-}
-
-.user-icon-inner {
-	font-size: 0.8em;
-}
-
-.text-icon {
-	border: 1px solid #000;
-	text-align: center;
-}
-
-.page-cover-image {
-	display: block;
-	object-fit: cover;
-	width: 100%;
-	max-height: 30vh;
-}
-
-.page-header-icon {
-	font-size: 3rem;
-	margin-bottom: 1rem;
-}
-
-.page-header-icon-with-cover {
-	margin-top: -0.72em;
-	margin-left: 0.07em;
-}
-
-.page-header-icon img {
-	border-radius: 3px;
-}
-
-.link-to-page {
-	margin: 1em 0;
-	padding: 0;
-	border: none;
-	font-weight: 500;
-}
-
-p > .user {
-	opacity: 0.5;
-}
-
-td > .user,
-td > time {
-	white-space: nowrap;
-}
-
-input[type="checkbox"] {
-	transform: scale(1.5);
-	margin-right: 0.6em;
-	vertical-align: middle;
-}
-
-p {
-	margin-top: 0.5em;
-	margin-bottom: 0.5em;
-}
-
-.image {
-	border: none;
-	margin: 1.5em 0;
-	padding: 0;
-	border-radius: 0;
-	text-align: center;
-}
-
-.code,
-code {
-	background: rgba(135, 131, 120, 0.15);
-	border-radius: 3px;
-	padding: 0.2em 0.4em;
-	border-radius: 3px;
-	font-size: 85%;
-	tab-size: 2;
-}
-
-code {
-	color: #eb5757;
-}
-
-.code {
-	padding: 1.5em 1em;
-}
-
-.code-wrap {
-	white-space: pre-wrap;
-	word-break: break-all;
-}
-
-.code > code {
-	background: none;
-	padding: 0;
-	font-size: 100%;
-	color: inherit;
-}
-
-blockquote {
-	font-size: 1.25em;
-	margin: 1em 0;
-	padding-left: 1em;
-	border-left: 3px solid rgb(55, 53, 47);
-}
-
-.bookmark {
-	text-decoration: none;
-	max-height: 8em;
-	padding: 0;
-	display: flex;
-	width: 100%;
-	align-items: stretch;
-}
-
-.bookmark-title {
-	font-size: 0.85em;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	height: 1.75em;
-	white-space: nowrap;
-}
-
-.bookmark-text {
-	display: flex;
-	flex-direction: column;
-}
-
-.bookmark-info {
-	flex: 4 1 180px;
-	padding: 12px 14px 14px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-}
-
-.bookmark-image {
-	width: 33%;
-	flex: 1 1 180px;
-	display: block;
-	position: relative;
-	object-fit: cover;
-	border-radius: 1px;
-}
-
-.bookmark-description {
-	color: rgba(55, 53, 47, 0.6);
-	font-size: 0.75em;
-	overflow: hidden;
-	max-height: 4.5em;
-	word-break: break-word;
-}
-
-.bookmark-href {
-	font-size: 0.75em;
-	margin-top: 0.25em;
-}
-
-.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
-.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
-.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
-.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
-.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
-.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
-.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
-.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
-.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
-.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
-.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
-.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
-.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
-.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
-.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
-.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
-.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
-.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
-.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
-.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
-.highlight-default {
-	color: rgba(55, 53, 47, 1);
-}
-.highlight-gray {
-	color: rgba(120, 119, 116, 1);
-	fill: rgba(120, 119, 116, 1);
-}
-.highlight-brown {
-	color: rgba(159, 107, 83, 1);
-	fill: rgba(159, 107, 83, 1);
-}
-.highlight-orange {
-	color: rgba(217, 115, 13, 1);
-	fill: rgba(217, 115, 13, 1);
-}
-.highlight-yellow {
-	color: rgba(203, 145, 47, 1);
-	fill: rgba(203, 145, 47, 1);
-}
-.highlight-teal {
-	color: rgba(68, 131, 97, 1);
-	fill: rgba(68, 131, 97, 1);
-}
-.highlight-blue {
-	color: rgba(51, 126, 169, 1);
-	fill: rgba(51, 126, 169, 1);
-}
-.highlight-purple {
-	color: rgba(144, 101, 176, 1);
-	fill: rgba(144, 101, 176, 1);
-}
-.highlight-pink {
-	color: rgba(193, 76, 138, 1);
-	fill: rgba(193, 76, 138, 1);
-}
-.highlight-red {
-	color: rgba(212, 76, 71, 1);
-	fill: rgba(212, 76, 71, 1);
-}
-.highlight-gray_background {
-	background: rgba(241, 241, 239, 1);
-}
-.highlight-brown_background {
-	background: rgba(244, 238, 238, 1);
-}
-.highlight-orange_background {
-	background: rgba(251, 236, 221, 1);
-}
-.highlight-yellow_background {
-	background: rgba(251, 243, 219, 1);
-}
-.highlight-teal_background {
-	background: rgba(237, 243, 236, 1);
-}
-.highlight-blue_background {
-	background: rgba(231, 243, 248, 1);
-}
-.highlight-purple_background {
-	background: rgba(244, 240, 247, 0.8);
-}
-.highlight-pink_background {
-	background: rgba(249, 238, 243, 0.8);
-}
-.highlight-red_background {
-	background: rgba(253, 235, 236, 1);
-}
-.block-color-default {
-	color: inherit;
-	fill: inherit;
-}
-.block-color-gray {
-	color: rgba(120, 119, 116, 1);
-	fill: rgba(120, 119, 116, 1);
-}
-.block-color-brown {
-	color: rgba(159, 107, 83, 1);
-	fill: rgba(159, 107, 83, 1);
-}
-.block-color-orange {
-	color: rgba(217, 115, 13, 1);
-	fill: rgba(217, 115, 13, 1);
-}
-.block-color-yellow {
-	color: rgba(203, 145, 47, 1);
-	fill: rgba(203, 145, 47, 1);
-}
-.block-color-teal {
-	color: rgba(68, 131, 97, 1);
-	fill: rgba(68, 131, 97, 1);
-}
-.block-color-blue {
-	color: rgba(51, 126, 169, 1);
-	fill: rgba(51, 126, 169, 1);
-}
-.block-color-purple {
-	color: rgba(144, 101, 176, 1);
-	fill: rgba(144, 101, 176, 1);
-}
-.block-color-pink {
-	color: rgba(193, 76, 138, 1);
-	fill: rgba(193, 76, 138, 1);
-}
-.block-color-red {
-	color: rgba(212, 76, 71, 1);
-	fill: rgba(212, 76, 71, 1);
-}
-.block-color-gray_background {
-	background: rgba(241, 241, 239, 1);
-}
-.block-color-brown_background {
-	background: rgba(244, 238, 238, 1);
-}
-.block-color-orange_background {
-	background: rgba(251, 236, 221, 1);
-}
-.block-color-yellow_background {
-	background: rgba(251, 243, 219, 1);
-}
-.block-color-teal_background {
-	background: rgba(237, 243, 236, 1);
-}
-.block-color-blue_background {
-	background: rgba(231, 243, 248, 1);
-}
-.block-color-purple_background {
-	background: rgba(244, 240, 247, 0.8);
-}
-.block-color-pink_background {
-	background: rgba(249, 238, 243, 0.8);
-}
-.block-color-red_background {
-	background: rgba(253, 235, 236, 1);
-}
-.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
-.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
-.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
-.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
-.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
-.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
-.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
-.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
-.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
-.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
-
-.checkbox {
-	display: inline-flex;
-	vertical-align: text-bottom;
-	width: 16;
-	height: 16;
-	background-size: 16px;
-	margin-left: 2px;
-	margin-right: 5px;
-}
-
-.checkbox-on {
-	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
-}
-
-.checkbox-off {
-	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
-}
-	
-</style></head><body><article id="e8d29cbe-46c7-4c56-96dc-eec0fd73a39a" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">😵‍💫</span></div><h1 class="page-title">(Beta) Portfolio</h1></header><div class="page-body"><p id="d5a9d7e9-1f6b-470d-b189-99459ad4ed62" class=""><strong><strong><strong><strong><strong><strong><strong><strong>Example/key:</strong></strong></strong></strong></strong></strong></strong></strong></p><ul id="e065b6e1-6b31-4f04-b4c0-7102f1bef7fe" class="toggle"><li><details open=""><summary>Year - “User/screen name”</summary><ul id="9dff98ab-2873-456e-9ef9-7b1295e0592f" class="toggle"><li><details open=""><summary>Month</summary><p id="3d9fa2ee-a0be-4a91-b94d-8ce7df0aec19" class="">Type - Name/Explainer (Link to page)</p></details></li></ul></details></li></ul><p id="b6b4eabf-8483-47d4-92eb-0a626dd48ac9" class="">Each ‘page’ contains 1+ image(s) of the piece.</p><hr id="78dac363-83df-4a17-b90b-cef9da990a9c"/><ul id="c0f303db-17c3-44ac-8278-60d55322e75e" class="toggle"><li><details open=""><summary><strong><strong><strong><strong><strong><strong><strong><strong><strong>2023 - “Futur3Sn0w”</strong></strong></strong></strong></strong></strong></strong></strong></strong></summary><ul id="b8dfb453-8381-4559-abf9-4f031cc22105" class="toggle"><li><details open=""><summary>January</summary><figure id="08fc58ee-6977-4e37-9b9c-59a7db5276cb" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Branding%20-%202023%20Logo%20+%20Banner%20Redesign%2008fc58ee69774e379b9c59a7db5276cb.html">Branding - 2023 Logo + Banner Redesign</a></figure><figure id="8d0bc55a-ceb3-46cd-9894-ba26b721b138" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Branding%20-%202023%20Logo%20+%20Banner%20Redesign%20(Dark)%208d0bc55aceb346cd9894ba26b721b138.html">Branding - 2023 Logo + Banner Redesign (Dark)</a></figure><figure id="8fcf66f3-2f94-4b12-a30d-16688a90525c" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Project%20-%20Animated%20Interactive%20Toggle%20&amp;%20Icons%20in%20F%208fcf66f32f944b12a30d16688a90525c.html">Project - Animated/Interactive Toggle &amp; Icons in Figma</a></figure></details></li></ul></details></li></ul><ul id="ff04ea7a-2a71-4bed-aae0-6b74a09f2b53" class="toggle"><li><details open=""><summary><strong>2022 - “Futur3Sn0w”</strong></summary><ul id="d213e3c6-ab5c-40bc-8e61-3440ffb4244a" class="toggle"><li><details open=""><summary>January</summary><figure id="745409fa-c201-439d-985c-b4158935fab2" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Project%20-%20BubbleUI%20Icon%20Pack%20745409fac201439d985cb4158935fab2.html">Project - BubbleUI Icon Pack</a></figure><figure id="0e1be960-e107-48ed-bb11-3e3ad5f900d8" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Wallpaper%20-%20%E2%80%9CConvergence%E2%80%9D%200e1be960e10748edbb113e3ad5f900d8.html">Wallpaper - “Convergence”</a></figure><figure id="97e6b042-7f24-4dc7-a2d7-caa39bd33790" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Scrapped%20-%20%E2%80%9CCorroborated%E2%80%9D%2097e6b0427f244dc7a2d7caa39bd33790.html">Scrapped - “Corroborated”</a></figure><figure id="9e646416-1955-432c-9b3a-dccc336e5898" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20Android%20Notification%20Center%20Concept%209e6464161955432c9b3adccc336e5898.html">Concept - Android Notification Center Concept</a></figure><figure id="5816b72f-7ac9-450c-aedd-51a6991c38f2" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Project%20-%20LocalStatus%205816b72f7ac9450caedd51a6991c38f2.html">Project - LocalStatus</a></figure></details></li></ul><ul id="340ffad9-7861-44a9-8bbb-1af2824a280c" class="toggle"><li><details open=""><summary>March</summary><figure id="e2628e33-ec3f-4510-a561-5075811ba156" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20Apple%20Event%20Invite%20e2628e33ec3f4510a5615075811ba156.html">Concept - Apple Event Invite</a></figure><figure id="7db34074-9e42-4753-b48a-a93c86cf5184" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20Apple%20Event%20Teaser%207db340749e424753b48aa93c86cf5184.html">Concept - Apple Event Teaser</a></figure></details></li></ul><ul id="f4f31bec-be3e-420d-8668-fb5375641f62" class="toggle"><li><details open=""><summary>May</summary><figure id="dbafe4e1-f6d5-4bb2-8383-7b7de63946ba" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Scrapped%20-%20%E2%80%9CSubsurface%E2%80%9D%20Icon%20Pack%20dbafe4e1f6d54bb283837b7de63946ba.html">Scrapped - “Subsurface” Icon Pack</a></figure><figure id="5c97e3ed-04e7-4708-a4e3-d9fdc3fad356" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Branding%20-%2022H1%20Update%205c97e3ed04e74708a4e3d9fdc3fad356.html">Branding - 22H1 Update</a></figure><figure id="9031d9c6-6519-4212-b9c1-c91d196c1b1a" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20Figma%20Icon%20for%20Mavericks%209031d9c665194212b9c1c91d196c1b1a.html">Concept - Figma Icon for Mavericks</a></figure><figure id="16b80f33-a37f-41fa-9e6a-a350e4f974b6" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20Windows%2011%20Context%20Menu%2016b80f33a37f41fa9e6aa350e4f974b6.html">Concept - Windows 11 Context Menu</a></figure></details></li></ul><ul id="9c18d541-3f6a-4d97-b7d4-4a68f0cc5a3f" class="toggle"><li><details open=""><summary>June</summary><figure id="d75e9e7c-9430-4519-bbab-cf0faeb615ba" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Project%20-%20%E2%80%9CFlick%E2%80%9D%20Fluent%20Icon%20Viewer%20d75e9e7c94304519bbabcf0faeb615ba.html">Project - “Flick” Fluent Icon Viewer</a></figure><figure id="198834b4-9d45-4156-be0a-f07890f64bb6" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Branding%20-%20June%20Refresh%20198834b49d454156be0af07890f64bb6.html">Branding - June Refresh</a></figure><figure id="199da412-d2de-48f8-86f1-0a9899fc613e" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20Feedback%20Card%20199da412d2de48f886f10a9899fc613e.html">Concept - Feedback Card</a></figure></details></li></ul><ul id="e137e695-9896-4d0a-9773-ca048f099503" class="toggle"><li><details open=""><summary>July</summary><figure id="11c044d6-4b51-4602-acee-7b0f4e47798c" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Project%20-%20%E2%80%9CPinboard%E2%80%9D%20The%20Material%20You%20Dashboard%2011c044d64b514602acee7b0f4e47798c.html">Project - “Pinboard” The Material You Dashboard</a></figure></details></li></ul><ul id="20ab7e6e-c78b-4b38-b0b3-5ddad6ba342a" class="toggle"><li><details open=""><summary>August</summary><figure id="f77f082c-2bfb-41cc-9445-89a74a386d1a" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Project%20-%20%E2%80%9CPlusUI%E2%80%9D%20Large-screen%20Dashboard%20f77f082c2bfb41cc944589a74a386d1a.html">Project - “PlusUI” Large-screen Dashboard</a></figure><figure id="df5459ab-2af0-4afe-8652-7b24e9309a43" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Scrapped%20-%20Material3%20for%20YouTube%20Web%20df5459ab2af04afe86527b24e9309a43.html">Scrapped - Material3 for YouTube Web</a></figure></details></li></ul><ul id="e84659f6-4143-402f-abad-b2a7088c78eb" class="toggle"><li><details open=""><summary>October</summary><figure id="76f3ebac-de88-41e9-b990-bbd0827eeed2" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Wallpaper%20-%20%E2%80%9CForums%E2%80%9D%2076f3ebacde8841e9b990bbd0827eeed2.html">Wallpaper - “Forums”</a></figure></details></li></ul><ul id="4b279bee-ddbe-4f52-942e-baacc8b38e5b" class="toggle"><li><details open=""><summary>November</summary><figure id="0a792aba-256a-4361-a2ab-e02b04ca012e" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Wallpaper%20-%20%E2%80%9CLegend%E2%80%9D%200a792aba256a4361a2abe02b04ca012e.html">Wallpaper - “Legend”</a></figure></details></li></ul><ul id="6c87378d-1a63-4677-9e60-4e6e06dd9a2e" class="toggle"><li><details open=""><summary>December</summary><figure id="8682412e-2b4b-4469-b046-04da16c877cf" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Project%20-%20History%20of%20the%20Windows%2010%20Search%20(bar%20bo%208682412e2b4b4469b04604da16c877cf.html">Project - History of the Windows 10 Search (bar/box)</a></figure><figure id="73d35cb0-9935-4237-8357-24a9214a6717" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Design%20-%20iPod%2073d35cb099354237835724a9214a6717.html">Design - iPod</a></figure></details></li></ul></details></li></ul><ul id="e39b5a30-aa47-4fcd-80dc-d33d819be43f" class="toggle"><li><details open=""><summary><strong>2021 - “Futur3Sn0w”</strong></summary><ul id="660b9e1c-caaa-4eac-a4f8-35af30b032fd" class="toggle"><li><details open=""><summary>January</summary><figure id="26613b10-b463-4555-af1a-85303fe153e9" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20YouTube%20Music%20Play%20Icon%2026613b10b4634555af1a85303fe153e9.html">Concept - YouTube Music Play Icon</a></figure><figure id="7eaeea12-2688-459f-b2d0-1a45bf82c92a" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Branding%20-%20Under%20Construction%207eaeea122688459fb2d01a45bf82c92a.html">Branding - Under Construction</a></figure></details></li></ul><ul id="75f991f6-288f-41e5-be7e-48dfe645262a" class="toggle"><li><details open=""><summary>February</summary><figure id="55845c87-0238-4df8-9c39-4092f52d6dd6" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20BigSurCenter%20Revisited%2055845c8702384df89c394092f52d6dd6.html">Concept - BigSurCenter Revisited</a></figure><figure id="fd141a3f-b2df-4fce-992a-7558bf08a4e5" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20macOS%20Drops%20fd141a3fb2df4fce992a7558bf08a4e5.html">Concept - macOS Drops</a></figure></details></li></ul><ul id="796502bb-08c7-4dfd-9ac3-ff31e0505711" class="toggle"><li><details open=""><summary>March</summary><figure id="10135ff6-e942-43b8-9aa2-db42eb8c9b14" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Redesign%20-%20Snazzy%20Labs%2010135ff6e94243b89aa2db42eb8c9b14.html">Redesign - Snazzy Labs</a></figure><figure id="83fc4d36-54dc-44e0-9970-72eedb770910" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Icon%20-%20BigSurCenter%2083fc4d3654dc44e0997072eedb770910.html">Icon - BigSurCenter</a></figure></details></li></ul><ul id="ee9d7a28-242b-44cf-ac23-48e1b40a867f" class="toggle"><li><details open=""><summary>April</summary><figure id="b13e1048-5c0d-421a-967f-36613dbac45e" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Branding%20-%20April%20Update%20b13e10485c0d421a967f36613dbac45e.html">Branding - April Update</a></figure></details></li></ul><ul id="978e96e6-10f4-4fa7-b771-2988c9f5f266" class="toggle"><li><details open=""><summary>June</summary><figure id="68ec0aec-3a8e-4c3b-b473-68b32b98cb2b" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Branding%20-%2021H2%20Update%2068ec0aec3a8e4c3bb47368b32b98cb2b.html">Branding - 21H2 Update</a></figure></details></li></ul><ul id="37678c0e-731b-42c5-8939-e41c3d7a13a1" class="toggle"><li><details open=""><summary>August</summary><figure id="849d88b6-3ed6-4176-b811-b8348dfe92af" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Wallpaper%20-%20Hero11%20849d88b63ed64176b811b8348dfe92af.html">Wallpaper - Hero11</a></figure></details></li></ul></details></li></ul><ul id="e8d5cc81-4fe5-460f-b13d-e0d39b8d2680" class="toggle"><li><details open=""><summary><strong>2020 - “Futur3Sn0w”</strong></summary><ul id="3859360f-850f-4191-836e-bbb22b772d8b" class="toggle"><li><details open=""><summary>January</summary><figure id="ac01c515-b654-4ce4-b10d-33d81c91ff6a" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Project%20-%20Neumorphic%20Branding%20ac01c515b6544ce4b10d33d81c91ff6a.html">Project - Neumorphic Branding</a></figure><figure id="33d0aa64-a685-4632-b901-024020ea31a4" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Project%20-%20Windows%2010X%20Folder%20Icons%2033d0aa64a6854632b901024020ea31a4.html">Project - Windows 10X Folder Icons</a></figure><figure id="8c79bef0-9db8-4a6e-935e-8dc5b0f4dd7b" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Experiment%20-%20Brand%20Font%20Sheet(s)%208c79bef09db84a6e935e8dc5b0f4dd7b.html">Experiment - Brand Font Sheet(s)</a></figure><figure id="c34fa8cd-f675-4aa4-8fd6-9c20e0337c8a" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Redesign%20-%20Announcement%20Preview%20Graphics%20c34fa8cdf6754aa48fd69c20e0337c8a.html">Redesign - Announcement/Preview Graphics</a></figure></details></li></ul><ul id="4061e6d2-966b-4d56-8593-6e511e3e1130" class="toggle"><li><details open=""><summary>February</summary><figure id="784ef804-09f8-4bb7-8723-0e11d147496e" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20Notification%20Center%20for%20iPads%20784ef80409f84bb787230e11d147496e.html">Concept - Notification Center for iPads</a></figure></details></li></ul><ul id="3fc45736-4796-4c62-998d-d01be2d99ebc" class="toggle"><li><details open=""><summary>March</summary><figure id="45d14729-e893-46f0-b8f0-9655aee2ed4c" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20Fluent%20Security%20Options%2045d14729e89346f0b8f09655aee2ed4c.html">Concept - Fluent Security Options</a></figure><figure id="9b5379e4-045c-4554-88f4-ebded3b2055d" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Wallpaper%20-%20Windows%2010X%20Hero%209b5379e4045c455488f4ebded3b2055d.html">Wallpaper - Windows 10X Hero</a></figure><figure id="dfa7e855-4e73-4c22-86ea-5b004596b4d7" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20Fluent%20New%20Tab%20Page%20dfa7e8554e734c2286ea5b004596b4d7.html">Concept - Fluent New Tab Page</a></figure></details></li></ul><ul id="e8ac3aa3-aa7f-4ffe-81e9-a2bc78d10165" class="toggle"><li><details open=""><summary>April</summary><figure id="1d149085-c2b0-4581-969c-870d2b52b116" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20%E2%80%9CDuoX%20Mobile%20Revisited%20-%20Notifications%E2%80%9D%201d149085c2b04581969c870d2b52b116.html">Concept - “DuoX Mobile Revisited - Notifications”</a></figure><figure id="363280b7-bcd9-4eab-a08a-8107c8576d2c" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20Fluent%20BSOD%20363280b7bcd94eaba08a8107c8576d2c.html">Concept - Fluent BSOD</a></figure><figure id="9e01d02d-d9bc-46e0-9429-53ac41fa5b6b" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20Google%20Assistant%20on%20Windows%209e01d02dd9bc46e0942953ac41fa5b6b.html">Concept - Google Assistant on Windows</a></figure><figure id="daff9ac6-9008-4baf-8c26-2d88c638e23b" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Project%20-%20%E2%80%9CModernButtons%E2%80%9D%20daff9ac690084baf8c262d88c638e23b.html">Project - “ModernButtons”</a></figure><figure id="38d1e299-7e53-4014-95ee-c77176c80afe" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20Microsoft%20Signup%2038d1e2997e53401495eec77176c80afe.html">Concept - Microsoft Signup</a></figure><figure id="148e30c3-4921-4322-9c33-d844a527775c" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Experiment%20-%20Fluent%20Design%20in%20Photoshop%20148e30c3492143229c33d844a527775c.html">Experiment - Fluent Design in Photoshop</a></figure></details></li></ul><ul id="da072d80-9ae8-48d0-b540-90b98a0c731f" class="toggle"><li><details open=""><summary>May</summary><figure id="75e1e796-dbf9-478f-931f-4625aff8d07b" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Wallpaper%20-%20%E2%80%9CMicrosoft%20Mountains%E2%80%9D%2075e1e796dbf9478f931f4625aff8d07b.html">Wallpaper - “Microsoft Mountains”</a></figure><figure id="f1b1e9ca-fad3-41b6-a3a3-4647cc050d95" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20Nest%20Hub%20Mini%20Now%20Playing%20UI%20f1b1e9cafad341b6a3a34647cc050d95.html">Concept - Nest Hub Mini Now Playing UI</a></figure></details></li></ul><ul id="0b74c5f9-9901-4139-ba66-eccea9481e9d" class="toggle"><li><details open=""><summary>June</summary><figure id="b9b7d261-807c-452e-b1fe-fa2ad6df8de3" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20BigSurCenter%20b9b7d261807c452eb1fefa2ad6df8de3.html">Concept - BigSurCenter</a></figure></details></li></ul><ul id="f4298551-3eb9-4543-b5c3-9302b35c4a22" class="toggle"><li><details open=""><summary>July</summary><figure id="8ce4c824-fe76-43ad-b53e-3fcaa0edd352" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20Fluent%20Context%20Menus%208ce4c824fe7643adb53e3fcaa0edd352.html">Concept - Fluent Context Menus</a></figure><figure id="4283dd14-7a1d-4343-9bd0-cb017a44cb4f" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20Fluent%20Microsoft%20Edge%204283dd147a1d43439bd0cb017a44cb4f.html">Concept - Fluent Microsoft Edge</a></figure><figure id="ff6bdcf9-df43-4936-94da-240248022e57" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Redesign%20-%20Google%20Chrome%20Icons%20ff6bdcf9df43493694da240248022e57.html">Redesign - Google Chrome Icons</a></figure><figure id="1660214f-1977-4cfe-82a6-b4ec4802486b" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20Windows%20Smart%20Home%20Display%201660214f19774cfe82a6b4ec4802486b.html">Concept - Windows Smart Home Display</a></figure></details></li></ul><ul id="69eec23e-872f-4029-9e5a-0f67704142f8" class="toggle"><li><details open=""><summary>August</summary><figure id="e993db72-e869-4d54-a977-6d5376530a7e" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Redesign%20-%20Cortana%20Icon%20e993db72e8694d54a9776d5376530a7e.html">Redesign - Cortana Icon</a></figure><figure id="ac5054c1-15f5-405b-b0e0-29f622fc068c" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20Aero%20Windows%2010%20Start%20Menu%20ac5054c115f5405bb0e029f622fc068c.html">Concept - Aero Windows 10 Start Menu</a></figure></details></li></ul><ul id="da9c4579-f6c8-4042-96b5-19768ce4668f" class="toggle"><li><details open=""><summary>September</summary><figure id="2e94576f-214a-4e38-a831-d9a0a8cd1d47" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Project%20-%20FluentRounds%202e94576f214a4e38a831d9a0a8cd1d47.html">Project - FluentRounds</a></figure><figure id="556f7d08-6c59-4c6b-a3d3-33fd4ab237af" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Project%20-%20Modern7%20Orb%20556f7d086c594c6ba3d333fd4ab237af.html">Project - Modern7 Orb</a></figure></details></li></ul><ul id="7e8623d9-9686-49c5-a601-88a8f999aa0a" class="toggle"><li><details open=""><summary>October</summary><figure id="a650e242-bfee-4b7e-8b89-3bfa2fd56135" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20Apple%20Search%20a650e242bfee4b7e8b893bfa2fd56135.html">Concept - Apple Search</a></figure><figure id="9df4942c-580d-4490-9073-6a579f8fd051" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20Microsoft%20OS%209df4942c580d449090736a579f8fd051.html">Concept - Microsoft OS</a></figure></details></li></ul><ul id="83c79c3d-a193-42d9-9279-1f0fa04d665f" class="toggle"><li><details open=""><summary>November</summary><figure id="84b23661-009a-4c96-99ba-65feb742f7af" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Project%20-%2010XinHTML%2084b23661009a4c9699ba65feb742f7af.html">Project - 10XinHTML</a></figure></details></li></ul><ul id="6750e2bd-19ee-476b-bc6b-b9cb5bea1cef" class="toggle"><li><details open=""><summary>December</summary><figure id="9cca866e-27a0-4650-9f70-58f7fbb37382" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20watchOS%208%209cca866e27a046509f7058f7fbb37382.html">Concept - watchOS 8</a></figure></details></li></ul></details></li></ul><ul id="b5fd8047-7db5-4d17-a163-c5e157ffe763" class="toggle"><li><details open=""><summary><strong>2019 - “Futur3Sn0w”</strong></summary><ul id="c8f82b90-4e09-4a7a-8f78-094aa3600ac5" class="toggle"><li><details open=""><summary>April</summary><figure id="ff504a77-f8e7-445a-88c7-21f1bff571d7" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Project%20-%20%E2%80%9CTilt%20Icon%20Pack%20for%20macOS%E2%80%9D%20ff504a77f8e7445a88c721f1bff571d7.html">Project - “Tilt Icon Pack for macOS”</a></figure><figure id="d6928523-07c7-4f55-931a-0df64228a165" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Wallpaper%20-%20%E2%80%9CBubbles%E2%80%9D%20d692852307c74f55931a0df64228a165.html">Wallpaper - “Bubbles”</a></figure></details></li></ul><ul id="8836f01f-3612-42aa-b4cd-4673b3741551" class="toggle"><li><details open=""><summary>May</summary><figure id="6950c4e6-7138-4149-b677-790f645954ef" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Icon%20Redesign%20-%20iOS%20Icons%206950c4e671384149b677790f645954ef.html">Icon Redesign - iOS Icons</a></figure></details></li></ul><ul id="387e7e7d-aa10-4002-9807-d39bd5236742" class="toggle"><li><details open=""><summary>June</summary><figure id="8f885cfd-a153-48ec-9b04-8be5f9ff6be8" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Promo%20-%20800%20Followers%208f885cfda15348ec9b048be5f9ff6be8.html">Promo - 800 Followers</a></figure><figure id="b39506f4-c92f-44e8-87ed-6378a428aa02" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20iOS%2013%20Volume%20Slider%20b39506f4c92f44e887ed6378a428aa02.html">Concept - iOS 13 Volume Slider</a></figure><figure id="634e76f7-b689-48d6-a409-10228341399b" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20iOS%2013%20Lockscreen%20Hub%20634e76f7b68948d6a40910228341399b.html">Concept - iOS 13 Lockscreen Hub</a></figure><figure id="8476eb86-e3e2-4356-8ccb-7bd3f3459aed" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Promo%20-%20700%20Followers%208476eb86e3e243568ccb7bd3f3459aed.html">Promo - 700 Followers</a></figure><figure id="17c89645-d146-4a44-b313-612be5dda924" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Promo%20-%20900%20Followers%2017c89645d1464a44b313612be5dda924.html">Promo - 900 Followers</a></figure></details></li></ul><ul id="266ad5ba-d800-4405-a4af-38fd744e6ac2" class="toggle"><li><details open=""><summary>August</summary><figure id="772b5bd9-3255-40db-9069-9e350799e4ab" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20%E2%80%9CMicrosoft%20Desktop%E2%80%9D%20772b5bd9325540db90699e350799e4ab.html">Concept - “Microsoft Desktop”</a></figure><figure id="a83688d0-41a0-4b9f-ba3f-3531bec63b59" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Project%20-%20%E2%80%9CPostModern%20-%20Home%20screen%E2%80%9D%20a83688d041a04b9fba3f3531bec63b59.html">Project - “PostModern - Home screen”</a></figure><figure id="54aa7385-f045-4bd1-9aa2-2fcac4b47cdf" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Project%20-%20%E2%80%9CPostModern%20-%20AOD%E2%80%9D%2054aa7385f0454bd19aa22fcac4b47cdf.html">Project - “PostModern - AOD”</a></figure><figure id="225955f2-4df9-434d-9145-373e81a2acef" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Project%20-%20%E2%80%9CPostModern%20-%20Lock%20screen%E2%80%9D%20225955f24df9434d9145373e81a2acef.html">Project - “PostModern - Lock screen”</a></figure></details></li></ul><ul id="66921671-c47d-433d-9a28-8abb456c9549" class="toggle"><li><details open=""><summary>September</summary><figure id="d4c719e6-1f40-4ff9-8e15-aaacb2882450" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Project%20-%20Project1080%20d4c719e61f404ff98e15aaacb2882450.html">Project - Project1080</a></figure><figure id="7fedf71f-104e-41fb-85fc-081f8fb41d98" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Digital%20Design%20-%209%2011%20Poster%207fedf71f104e41fb85fc081f8fb41d98.html">Digital Design - 9/11 Poster</a></figure></details></li></ul><ul id="d154c54d-a861-49c8-903c-88001baafa74" class="toggle"><li><details open=""><summary>October</summary><figure id="b73f3f07-a07b-4869-9648-8808e3633b21" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20%E2%80%9CIf%20Apple%20Bought%20Spotify%E2%80%9D%20b73f3f07a07b486996488808e3633b21.html">Concept - “If Apple Bought Spotify”</a></figure><figure id="8b6ba08b-bf26-4cb1-869b-007a2e866d70" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20%E2%80%9CReAssist%E2%80%9D%208b6ba08bbf264cb1869b007a2e866d70.html">Concept - “ReAssist”</a></figure></details></li></ul><ul id="272e8bf6-7c72-490d-a637-f611c8f4ce86" class="toggle"><li><details open=""><summary>December</summary><figure id="754fbca0-0256-477f-9f9a-5f03a59c5a02" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20%E2%80%9CDuoX%20Phone%E2%80%9D%20754fbca00256477f9f9a5f03a59c5a02.html">Concept - “DuoX Phone”</a></figure><figure id="7aeb9ec9-5610-4dda-96df-1fe06d03993c" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20Fluent%20Design%20Settings%207aeb9ec956104dda96df1fe06d03993c.html">Concept - Fluent Design Settings</a></figure></details></li></ul></details></li></ul><ul id="3064b193-cd1b-43c6-934a-3b5b3b56daad" class="toggle"><li><details open=""><summary><strong>2018 - “TechKnow Studio”</strong></summary><ul id="08756f2b-458b-43a1-986f-b0da95a48d98" class="toggle"><li><details open=""><summary>April</summary><figure id="6b64d76a-4dde-4d3f-8b9e-7541e29c59ce" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Remake%20-%20Windows%2010%20BSOD%206b64d76a4dde4d3f8b9e7541e29c59ce.html">Remake - Windows 10 BSOD</a></figure></details></li></ul><ul id="183f3a36-239c-4a10-ac2b-40b59de4029f" class="toggle"><li><details open=""><summary>July</summary><figure id="26c8b178-843a-48d1-a9de-5306d2de2591" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20Retro%20Music%20for%20iOS%2026c8b178843a48d1a9de5306d2de2591.html">Concept - Retro Music for iOS</a></figure></details></li></ul><ul id="f376c4b4-1352-4f68-940a-8c784fda0edf" class="toggle"><li><details open=""><summary>November</summary><figure id="3ab9f0fb-5f8c-45a3-af69-179425e28708" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Branding%20-%20November%202018%203ab9f0fb5f8c45a3af69179425e28708.html">Branding - November 2018</a></figure><figure id="a8f71aa1-2f15-4ec5-8850-1b7f7c3f750c" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Redesign%20-%20Safari%20a8f71aa12f154ec588501b7f7c3f750c.html">Redesign - Safari</a></figure></details></li></ul><ul id="848d44ca-111d-48df-bba9-061faef2467d" class="toggle"><li><details open=""><summary>December</summary><figure id="123d0504-621d-4a4f-bd67-b8b9c0bc4b0e" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Scrapped%20-%20%E2%80%9COutreach%E2%80%9D%20Icon%20123d0504621d4a4fbd67b8b9c0bc4b0e.html">Scrapped - “Outreach” Icon</a></figure></details></li></ul></details></li></ul><hr id="83ab13f4-9fd8-4295-bcbd-c0f00bd04c18"/><figure id="9d6960ca-7973-4879-aabb-8fe5ebc5e5ce" class="link-to-page"><a href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Jailbreak%20Setups%209d6960ca79734879aabb8fe5ebc5e5ce.html">Jailbreak Setups</a></figure></div></article></body></html>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>(Beta) Portfolio</title>
+	<style>
+		/* cspell:disable-file */
+		/* webkit printing magic: print all background colors */
+		html {
+			-webkit-print-color-adjust: exact;
+		}
+
+		* {
+			box-sizing: border-box;
+			-webkit-print-color-adjust: exact;
+		}
+
+		html,
+		body {
+			margin: 0;
+			padding: 0;
+		}
+
+		@media only screen {
+			body {
+				margin: 2em auto;
+				max-width: 900px;
+				color: rgb(55, 53, 47);
+			}
+		}
+
+		body {
+			line-height: 1.5;
+			white-space: pre-wrap;
+		}
+
+		a,
+		a.visited {
+			color: inherit;
+			text-decoration: underline;
+		}
+
+		.pdf-relative-link-path {
+			font-size: 80%;
+			color: #444;
+		}
+
+		h1,
+		h2,
+		h3 {
+			letter-spacing: -0.01em;
+			line-height: 1.2;
+			font-weight: 600;
+			margin-bottom: 0;
+		}
+
+		.page-title {
+			font-size: 2.5rem;
+			font-weight: 700;
+			margin-top: 0;
+			margin-bottom: 0.75em;
+		}
+
+		h1 {
+			font-size: 1.875rem;
+			margin-top: 1.875rem;
+		}
+
+		h2 {
+			font-size: 1.5rem;
+			margin-top: 1.5rem;
+		}
+
+		h3 {
+			font-size: 1.25rem;
+			margin-top: 1.25rem;
+		}
+
+		.source {
+			border: 1px solid #ddd;
+			border-radius: 3px;
+			padding: 1.5em;
+			word-break: break-all;
+		}
+
+		.callout {
+			border-radius: 3px;
+			padding: 1rem;
+		}
+
+		figure {
+			margin: 1.25em 0;
+			page-break-inside: avoid;
+		}
+
+		figcaption {
+			opacity: 0.5;
+			font-size: 85%;
+			margin-top: 0.5em;
+		}
+
+		mark {
+			background-color: transparent;
+		}
+
+		.indented {
+			padding-left: 1.5em;
+		}
+
+		hr {
+			background: transparent;
+			display: block;
+			width: 100%;
+			height: 1px;
+			visibility: visible;
+			border: none;
+			border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+		}
+
+		img {
+			max-width: 100%;
+		}
+
+		@media only print {
+			img {
+				max-height: 100vh;
+				object-fit: contain;
+			}
+		}
+
+		@page {
+			margin: 1in;
+		}
+
+		.collection-content {
+			font-size: 0.875rem;
+		}
+
+		.column-list {
+			display: flex;
+			justify-content: space-between;
+		}
+
+		.column {
+			padding: 0 1em;
+		}
+
+		.column:first-child {
+			padding-left: 0;
+		}
+
+		.column:last-child {
+			padding-right: 0;
+		}
+
+		.table_of_contents-item {
+			display: block;
+			font-size: 0.875rem;
+			line-height: 1.3;
+			padding: 0.125rem;
+		}
+
+		.table_of_contents-indent-1 {
+			margin-left: 1.5rem;
+		}
+
+		.table_of_contents-indent-2 {
+			margin-left: 3rem;
+		}
+
+		.table_of_contents-indent-3 {
+			margin-left: 4.5rem;
+		}
+
+		.table_of_contents-link {
+			text-decoration: none;
+			opacity: 0.7;
+			border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+		}
+
+		table,
+		th,
+		td {
+			border: 1px solid rgba(55, 53, 47, 0.09);
+			border-collapse: collapse;
+		}
+
+		table {
+			border-left: none;
+			border-right: none;
+		}
+
+		th,
+		td {
+			font-weight: normal;
+			padding: 0.25em 0.5em;
+			line-height: 1.5;
+			min-height: 1.5em;
+			text-align: left;
+		}
+
+		th {
+			color: rgba(55, 53, 47, 0.6);
+		}
+
+		ol,
+		ul {
+			margin: 0;
+			margin-block-start: 0.6em;
+			margin-block-end: 0.6em;
+		}
+
+		li>ol:first-child,
+		li>ul:first-child {
+			margin-block-start: 0.6em;
+		}
+
+		ul>li {
+			list-style: disc;
+		}
+
+		ul.to-do-list {
+			text-indent: -1.7em;
+		}
+
+		ul.to-do-list>li {
+			list-style: none;
+		}
+
+		.to-do-children-checked {
+			text-decoration: line-through;
+			opacity: 0.375;
+		}
+
+		ul.toggle>li {
+			list-style: none;
+		}
+
+		ul {
+			padding-inline-start: 1.7em;
+		}
+
+		ul>li {
+			padding-left: 0.1em;
+		}
+
+		ol {
+			padding-inline-start: 1.6em;
+		}
+
+		ol>li {
+			padding-left: 0.2em;
+		}
+
+		.mono ol {
+			padding-inline-start: 2em;
+		}
+
+		.mono ol>li {
+			text-indent: -0.4em;
+		}
+
+		.toggle {
+			padding-inline-start: 0em;
+			list-style-type: none;
+		}
+
+		/* Indent toggle children */
+		.toggle>li>details {
+			padding-left: 1.7em;
+		}
+
+		.toggle>li>details>summary {
+			margin-left: -1.1em;
+		}
+
+		.selected-value {
+			display: inline-block;
+			padding: 0 0.5em;
+			background: rgba(206, 205, 202, 0.5);
+			border-radius: 3px;
+			margin-right: 0.5em;
+			margin-top: 0.3em;
+			margin-bottom: 0.3em;
+			white-space: nowrap;
+		}
+
+		.collection-title {
+			display: inline-block;
+			margin-right: 1em;
+		}
+
+		.simple-table {
+			margin-top: 1em;
+			font-size: 0.875rem;
+			empty-cells: show;
+		}
+
+		.simple-table td {
+			height: 29px;
+			min-width: 120px;
+		}
+
+		.simple-table th {
+			height: 29px;
+			min-width: 120px;
+		}
+
+		.simple-table-header-color {
+			background: rgb(247, 246, 243);
+			color: black;
+		}
+
+		.simple-table-header {
+			font-weight: 500;
+		}
+
+		time {
+			opacity: 0.5;
+		}
+
+		.icon {
+			display: inline-block;
+			max-width: 1.2em;
+			max-height: 1.2em;
+			text-decoration: none;
+			vertical-align: text-bottom;
+			margin-right: 0.5em;
+		}
+
+		img.icon {
+			border-radius: 3px;
+		}
+
+		.user-icon {
+			width: 1.5em;
+			height: 1.5em;
+			border-radius: 100%;
+			margin-right: 0.5rem;
+		}
+
+		.user-icon-inner {
+			font-size: 0.8em;
+		}
+
+		.text-icon {
+			border: 1px solid #000;
+			text-align: center;
+		}
+
+		.page-cover-image {
+			display: block;
+			object-fit: cover;
+			width: 100%;
+			max-height: 30vh;
+		}
+
+		.page-header-icon {
+			font-size: 3rem;
+			margin-bottom: 1rem;
+		}
+
+		.page-header-icon-with-cover {
+			margin-top: -0.72em;
+			margin-left: 0.07em;
+		}
+
+		.page-header-icon img {
+			border-radius: 3px;
+		}
+
+		.link-to-page {
+			margin: 1em 0;
+			padding: 0;
+			border: none;
+			font-weight: 500;
+		}
+
+		p>.user {
+			opacity: 0.5;
+		}
+
+		td>.user,
+		td>time {
+			white-space: nowrap;
+		}
+
+		input[type="checkbox"] {
+			transform: scale(1.5);
+			margin-right: 0.6em;
+			vertical-align: middle;
+		}
+
+		p {
+			margin-top: 0.5em;
+			margin-bottom: 0.5em;
+		}
+
+		.image {
+			border: none;
+			margin: 1.5em 0;
+			padding: 0;
+			border-radius: 0;
+			text-align: center;
+		}
+
+		.code,
+		code {
+			background: rgba(135, 131, 120, 0.15);
+			border-radius: 3px;
+			padding: 0.2em 0.4em;
+			border-radius: 3px;
+			font-size: 85%;
+			tab-size: 2;
+		}
+
+		code {
+			color: #eb5757;
+		}
+
+		.code {
+			padding: 1.5em 1em;
+		}
+
+		.code-wrap {
+			white-space: pre-wrap;
+			word-break: break-all;
+		}
+
+		.code>code {
+			background: none;
+			padding: 0;
+			font-size: 100%;
+			color: inherit;
+		}
+
+		blockquote {
+			font-size: 1.25em;
+			margin: 1em 0;
+			padding-left: 1em;
+			border-left: 3px solid rgb(55, 53, 47);
+		}
+
+		.bookmark {
+			text-decoration: none;
+			max-height: 8em;
+			padding: 0;
+			display: flex;
+			width: 100%;
+			align-items: stretch;
+		}
+
+		.bookmark-title {
+			font-size: 0.85em;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			height: 1.75em;
+			white-space: nowrap;
+		}
+
+		.bookmark-text {
+			display: flex;
+			flex-direction: column;
+		}
+
+		.bookmark-info {
+			flex: 4 1 180px;
+			padding: 12px 14px 14px;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+		}
+
+		.bookmark-image {
+			width: 33%;
+			flex: 1 1 180px;
+			display: block;
+			position: relative;
+			object-fit: cover;
+			border-radius: 1px;
+		}
+
+		.bookmark-description {
+			color: rgba(55, 53, 47, 0.6);
+			font-size: 0.75em;
+			overflow: hidden;
+			max-height: 4.5em;
+			word-break: break-word;
+		}
+
+		.bookmark-href {
+			font-size: 0.75em;
+			margin-top: 0.25em;
+		}
+
+		.sans {
+			font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+		}
+
+		.code {
+			font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace;
+		}
+
+		.serif {
+			font-family: Lyon-Text, Georgia, ui-serif, serif;
+		}
+
+		.mono {
+			font-family: iawriter-mono, Nitti, Menlo, Courier, monospace;
+		}
+
+		.pdf .sans {
+			font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP';
+		}
+
+		.pdf:lang(zh-CN) .sans {
+			font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC';
+		}
+
+		.pdf:lang(zh-TW) .sans {
+			font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC';
+		}
+
+		.pdf:lang(ko-KR) .sans {
+			font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR';
+		}
+
+		.pdf .code {
+			font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP';
+		}
+
+		.pdf:lang(zh-CN) .code {
+			font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC';
+		}
+
+		.pdf:lang(zh-TW) .code {
+			font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC';
+		}
+
+		.pdf:lang(ko-KR) .code {
+			font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR';
+		}
+
+		.pdf .serif {
+			font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP';
+		}
+
+		.pdf:lang(zh-CN) .serif {
+			font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC';
+		}
+
+		.pdf:lang(zh-TW) .serif {
+			font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC';
+		}
+
+		.pdf:lang(ko-KR) .serif {
+			font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR';
+		}
+
+		.pdf .mono {
+			font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP';
+		}
+
+		.pdf:lang(zh-CN) .mono {
+			font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC';
+		}
+
+		.pdf:lang(zh-TW) .mono {
+			font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC';
+		}
+
+		.pdf:lang(ko-KR) .mono {
+			font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR';
+		}
+
+		.highlight-default {
+			color: rgba(55, 53, 47, 1);
+		}
+
+		.highlight-gray {
+			color: rgba(120, 119, 116, 1);
+			fill: rgba(120, 119, 116, 1);
+		}
+
+		.highlight-brown {
+			color: rgba(159, 107, 83, 1);
+			fill: rgba(159, 107, 83, 1);
+		}
+
+		.highlight-orange {
+			color: rgba(217, 115, 13, 1);
+			fill: rgba(217, 115, 13, 1);
+		}
+
+		.highlight-yellow {
+			color: rgba(203, 145, 47, 1);
+			fill: rgba(203, 145, 47, 1);
+		}
+
+		.highlight-teal {
+			color: rgba(68, 131, 97, 1);
+			fill: rgba(68, 131, 97, 1);
+		}
+
+		.highlight-blue {
+			color: rgba(51, 126, 169, 1);
+			fill: rgba(51, 126, 169, 1);
+		}
+
+		.highlight-purple {
+			color: rgba(144, 101, 176, 1);
+			fill: rgba(144, 101, 176, 1);
+		}
+
+		.highlight-pink {
+			color: rgba(193, 76, 138, 1);
+			fill: rgba(193, 76, 138, 1);
+		}
+
+		.highlight-red {
+			color: rgba(212, 76, 71, 1);
+			fill: rgba(212, 76, 71, 1);
+		}
+
+		.highlight-gray_background {
+			background: rgba(241, 241, 239, 1);
+		}
+
+		.highlight-brown_background {
+			background: rgba(244, 238, 238, 1);
+		}
+
+		.highlight-orange_background {
+			background: rgba(251, 236, 221, 1);
+		}
+
+		.highlight-yellow_background {
+			background: rgba(251, 243, 219, 1);
+		}
+
+		.highlight-teal_background {
+			background: rgba(237, 243, 236, 1);
+		}
+
+		.highlight-blue_background {
+			background: rgba(231, 243, 248, 1);
+		}
+
+		.highlight-purple_background {
+			background: rgba(244, 240, 247, 0.8);
+		}
+
+		.highlight-pink_background {
+			background: rgba(249, 238, 243, 0.8);
+		}
+
+		.highlight-red_background {
+			background: rgba(253, 235, 236, 1);
+		}
+
+		.block-color-default {
+			color: inherit;
+			fill: inherit;
+		}
+
+		.block-color-gray {
+			color: rgba(120, 119, 116, 1);
+			fill: rgba(120, 119, 116, 1);
+		}
+
+		.block-color-brown {
+			color: rgba(159, 107, 83, 1);
+			fill: rgba(159, 107, 83, 1);
+		}
+
+		.block-color-orange {
+			color: rgba(217, 115, 13, 1);
+			fill: rgba(217, 115, 13, 1);
+		}
+
+		.block-color-yellow {
+			color: rgba(203, 145, 47, 1);
+			fill: rgba(203, 145, 47, 1);
+		}
+
+		.block-color-teal {
+			color: rgba(68, 131, 97, 1);
+			fill: rgba(68, 131, 97, 1);
+		}
+
+		.block-color-blue {
+			color: rgba(51, 126, 169, 1);
+			fill: rgba(51, 126, 169, 1);
+		}
+
+		.block-color-purple {
+			color: rgba(144, 101, 176, 1);
+			fill: rgba(144, 101, 176, 1);
+		}
+
+		.block-color-pink {
+			color: rgba(193, 76, 138, 1);
+			fill: rgba(193, 76, 138, 1);
+		}
+
+		.block-color-red {
+			color: rgba(212, 76, 71, 1);
+			fill: rgba(212, 76, 71, 1);
+		}
+
+		.block-color-gray_background {
+			background: rgba(241, 241, 239, 1);
+		}
+
+		.block-color-brown_background {
+			background: rgba(244, 238, 238, 1);
+		}
+
+		.block-color-orange_background {
+			background: rgba(251, 236, 221, 1);
+		}
+
+		.block-color-yellow_background {
+			background: rgba(251, 243, 219, 1);
+		}
+
+		.block-color-teal_background {
+			background: rgba(237, 243, 236, 1);
+		}
+
+		.block-color-blue_background {
+			background: rgba(231, 243, 248, 1);
+		}
+
+		.block-color-purple_background {
+			background: rgba(244, 240, 247, 0.8);
+		}
+
+		.block-color-pink_background {
+			background: rgba(249, 238, 243, 0.8);
+		}
+
+		.block-color-red_background {
+			background: rgba(253, 235, 236, 1);
+		}
+
+		.select-value-color-pink {
+			background-color: rgba(245, 224, 233, 1);
+		}
+
+		.select-value-color-purple {
+			background-color: rgba(232, 222, 238, 1);
+		}
+
+		.select-value-color-green {
+			background-color: rgba(219, 237, 219, 1);
+		}
+
+		.select-value-color-gray {
+			background-color: rgba(227, 226, 224, 1);
+		}
+
+		.select-value-color-opaquegray {
+			background-color: rgba(255, 255, 255, 0.0375);
+		}
+
+		.select-value-color-orange {
+			background-color: rgba(250, 222, 201, 1);
+		}
+
+		.select-value-color-brown {
+			background-color: rgba(238, 224, 218, 1);
+		}
+
+		.select-value-color-red {
+			background-color: rgba(255, 226, 221, 1);
+		}
+
+		.select-value-color-yellow {
+			background-color: rgba(253, 236, 200, 1);
+		}
+
+		.select-value-color-blue {
+			background-color: rgba(211, 229, 239, 1);
+		}
+
+		.checkbox {
+			display: inline-flex;
+			vertical-align: text-bottom;
+			width: 16;
+			height: 16;
+			background-size: 16px;
+			margin-left: 2px;
+			margin-right: 5px;
+		}
+
+		.checkbox-on {
+			background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+		}
+
+		.checkbox-off {
+			background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+		}
+	</style>
+</head>
+
+<body>
+	<article id="e8d29cbe-46c7-4c56-96dc-eec0fd73a39a" class="page sans">
+		<header>
+			<div class="page-header-icon undefined"><span class="icon">😵‍💫</span></div>
+			<h1 class="page-title">(Beta) Portfolio</h1>
+		</header>
+		<div class="page-body">
+			<p id="d5a9d7e9-1f6b-470d-b189-99459ad4ed62" class="">
+				<strong><strong><strong><strong><strong><strong><strong><strong>Example/key:</strong></strong></strong></strong></strong></strong></strong></strong>
+			</p>
+			<ul id="e065b6e1-6b31-4f04-b4c0-7102f1bef7fe" class="toggle">
+				<li>
+					<details open="">
+						<summary>Year - “User/screen name”</summary>
+						<ul id="9dff98ab-2873-456e-9ef9-7b1295e0592f" class="toggle">
+							<li>
+								<details open="">
+									<summary>Month</summary>
+									<p id="3d9fa2ee-a0be-4a91-b94d-8ce7df0aec19" class="">Type - Name/Explainer (Link to
+										page)</p>
+								</details>
+							</li>
+						</ul>
+					</details>
+				</li>
+			</ul>
+			<p id="b6b4eabf-8483-47d4-92eb-0a626dd48ac9" class="">Each ‘page’ contains 1+ image(s) of the piece.</p>
+			<hr id="78dac363-83df-4a17-b90b-cef9da990a9c" />
+			<ul id="c0f303db-17c3-44ac-8278-60d55322e75e" class="toggle">
+				<li>
+					<details open="">
+						<summary><strong><strong><strong><strong><strong><strong><strong><strong><strong>2023 -
+																“Futur3Sn0w”</strong></strong></strong></strong></strong></strong></strong></strong></strong>
+						</summary>
+						<ul id="b8dfb453-8381-4559-abf9-4f031cc22105" class="toggle">
+							<li>
+								<details open="">
+									<summary>January</summary>
+									<figure id="08fc58ee-6977-4e37-9b9c-59a7db5276cb" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Branding%20-%202023%20Logo%20+%20Banner%20Redesign%2008fc58ee69774e379b9c59a7db5276cb.html">Branding
+											- 2023 Logo + Banner Redesign</a></figure>
+									<figure id="8d0bc55a-ceb3-46cd-9894-ba26b721b138" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Branding%20-%202023%20Logo%20+%20Banner%20Redesign%20(Dark)%208d0bc55aceb346cd9894ba26b721b138.html">Branding
+											- 2023 Logo + Banner Redesign (Dark)</a></figure>
+									<figure id="8fcf66f3-2f94-4b12-a30d-16688a90525c" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Project%20-%20Animated%20Interactive%20Toggle%20&amp;%20Icons%20in%20F%208fcf66f32f944b12a30d16688a90525c.html">Project
+											- Animated/Interactive Toggle &amp; Icons in Figma</a></figure>
+								</details>
+							</li>
+						</ul>
+					</details>
+				</li>
+			</ul>
+			<ul id="ff04ea7a-2a71-4bed-aae0-6b74a09f2b53" class="toggle">
+				<li>
+					<details open="">
+						<summary><strong>2022 - “Futur3Sn0w”</strong></summary>
+						<ul id="d213e3c6-ab5c-40bc-8e61-3440ffb4244a" class="toggle">
+							<li>
+								<details open="">
+									<summary>January</summary>
+									<figure id="745409fa-c201-439d-985c-b4158935fab2" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Project%20-%20BubbleUI%20Icon%20Pack%20745409fac201439d985cb4158935fab2.html">Project
+											- BubbleUI Icon Pack</a></figure>
+									<figure id="0e1be960-e107-48ed-bb11-3e3ad5f900d8" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Wallpaper%20-%20%E2%80%9CConvergence%E2%80%9D%200e1be960e10748edbb113e3ad5f900d8.html">Wallpaper
+											- “Convergence”</a></figure>
+									<figure id="97e6b042-7f24-4dc7-a2d7-caa39bd33790" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Scrapped%20-%20%E2%80%9CCorroborated%E2%80%9D%2097e6b0427f244dc7a2d7caa39bd33790.html">Scrapped
+											- “Corroborated”</a></figure>
+									<figure id="9e646416-1955-432c-9b3a-dccc336e5898" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20Android%20Notification%20Center%20Concept%209e6464161955432c9b3adccc336e5898.html">Concept
+											- Android Notification Center Concept</a></figure>
+									<figure id="5816b72f-7ac9-450c-aedd-51a6991c38f2" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Project%20-%20LocalStatus%205816b72f7ac9450caedd51a6991c38f2.html">Project
+											- LocalStatus</a></figure>
+								</details>
+							</li>
+						</ul>
+						<ul id="340ffad9-7861-44a9-8bbb-1af2824a280c" class="toggle">
+							<li>
+								<details open="">
+									<summary>March</summary>
+									<figure id="e2628e33-ec3f-4510-a561-5075811ba156" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20Apple%20Event%20Invite%20e2628e33ec3f4510a5615075811ba156.html">Concept
+											- Apple Event Invite</a></figure>
+									<figure id="7db34074-9e42-4753-b48a-a93c86cf5184" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20Apple%20Event%20Teaser%207db340749e424753b48aa93c86cf5184.html">Concept
+											- Apple Event Teaser</a></figure>
+								</details>
+							</li>
+						</ul>
+						<ul id="f4f31bec-be3e-420d-8668-fb5375641f62" class="toggle">
+							<li>
+								<details open="">
+									<summary>May</summary>
+									<figure id="dbafe4e1-f6d5-4bb2-8383-7b7de63946ba" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Scrapped%20-%20%E2%80%9CSubsurface%E2%80%9D%20Icon%20Pack%20dbafe4e1f6d54bb283837b7de63946ba.html">Scrapped
+											- “Subsurface” Icon Pack</a></figure>
+									<figure id="5c97e3ed-04e7-4708-a4e3-d9fdc3fad356" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Branding%20-%2022H1%20Update%205c97e3ed04e74708a4e3d9fdc3fad356.html">Branding
+											- 22H1 Update</a></figure>
+									<figure id="9031d9c6-6519-4212-b9c1-c91d196c1b1a" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20Figma%20Icon%20for%20Mavericks%209031d9c665194212b9c1c91d196c1b1a.html">Concept
+											- Figma Icon for Mavericks</a></figure>
+									<figure id="16b80f33-a37f-41fa-9e6a-a350e4f974b6" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20Windows%2011%20Context%20Menu%2016b80f33a37f41fa9e6aa350e4f974b6.html">Concept
+											- Windows 11 Context Menu</a></figure>
+								</details>
+							</li>
+						</ul>
+						<ul id="9c18d541-3f6a-4d97-b7d4-4a68f0cc5a3f" class="toggle">
+							<li>
+								<details open="">
+									<summary>June</summary>
+									<figure id="d75e9e7c-9430-4519-bbab-cf0faeb615ba" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Project%20-%20%E2%80%9CFlick%E2%80%9D%20Fluent%20Icon%20Viewer%20d75e9e7c94304519bbabcf0faeb615ba.html">Project
+											- “Flick” Fluent Icon Viewer</a></figure>
+									<figure id="198834b4-9d45-4156-be0a-f07890f64bb6" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Branding%20-%20June%20Refresh%20198834b49d454156be0af07890f64bb6.html">Branding
+											- June Refresh</a></figure>
+									<figure id="199da412-d2de-48f8-86f1-0a9899fc613e" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20Feedback%20Card%20199da412d2de48f886f10a9899fc613e.html">Concept
+											- Feedback Card</a></figure>
+								</details>
+							</li>
+						</ul>
+						<ul id="e137e695-9896-4d0a-9773-ca048f099503" class="toggle">
+							<li>
+								<details open="">
+									<summary>July</summary>
+									<figure id="11c044d6-4b51-4602-acee-7b0f4e47798c" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Project%20-%20%E2%80%9CPinboard%E2%80%9D%20The%20Material%20You%20Dashboard%2011c044d64b514602acee7b0f4e47798c.html">Project
+											- “Pinboard” The Material You Dashboard</a></figure>
+								</details>
+							</li>
+						</ul>
+						<ul id="20ab7e6e-c78b-4b38-b0b3-5ddad6ba342a" class="toggle">
+							<li>
+								<details open="">
+									<summary>August</summary>
+									<figure id="f77f082c-2bfb-41cc-9445-89a74a386d1a" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Project%20-%20%E2%80%9CPlusUI%E2%80%9D%20Large-screen%20Dashboard%20f77f082c2bfb41cc944589a74a386d1a.html">Project
+											- “PlusUI” Large-screen Dashboard</a></figure>
+									<figure id="df5459ab-2af0-4afe-8652-7b24e9309a43" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Scrapped%20-%20Material3%20for%20YouTube%20Web%20df5459ab2af04afe86527b24e9309a43.html">Scrapped
+											- Material3 for YouTube Web</a></figure>
+								</details>
+							</li>
+						</ul>
+						<ul id="e84659f6-4143-402f-abad-b2a7088c78eb" class="toggle">
+							<li>
+								<details open="">
+									<summary>October</summary>
+									<figure id="76f3ebac-de88-41e9-b990-bbd0827eeed2" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Wallpaper%20-%20%E2%80%9CForums%E2%80%9D%2076f3ebacde8841e9b990bbd0827eeed2.html">Wallpaper
+											- “Forums”</a></figure>
+								</details>
+							</li>
+						</ul>
+						<ul id="4b279bee-ddbe-4f52-942e-baacc8b38e5b" class="toggle">
+							<li>
+								<details open="">
+									<summary>November</summary>
+									<figure id="0a792aba-256a-4361-a2ab-e02b04ca012e" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Wallpaper%20-%20%E2%80%9CLegend%E2%80%9D%200a792aba256a4361a2abe02b04ca012e.html">Wallpaper
+											- “Legend”</a></figure>
+								</details>
+							</li>
+						</ul>
+						<ul id="6c87378d-1a63-4677-9e60-4e6e06dd9a2e" class="toggle">
+							<li>
+								<details open="">
+									<summary>December</summary>
+									<figure id="8682412e-2b4b-4469-b046-04da16c877cf" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Project%20-%20History%20of%20the%20Windows%2010%20Search%20(bar%20bo%208682412e2b4b4469b04604da16c877cf.html">Project
+											- History of the Windows 10 Search (bar/box)</a></figure>
+									<figure id="73d35cb0-9935-4237-8357-24a9214a6717" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Design%20-%20iPod%2073d35cb099354237835724a9214a6717.html">Design
+											- iPod</a></figure>
+								</details>
+							</li>
+						</ul>
+					</details>
+				</li>
+			</ul>
+			<ul id="e39b5a30-aa47-4fcd-80dc-d33d819be43f" class="toggle">
+				<li>
+					<details open="">
+						<summary><strong>2021 - “Futur3Sn0w”</strong></summary>
+						<ul id="660b9e1c-caaa-4eac-a4f8-35af30b032fd" class="toggle">
+							<li>
+								<details open="">
+									<summary>January</summary>
+									<figure id="26613b10-b463-4555-af1a-85303fe153e9" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20YouTube%20Music%20Play%20Icon%2026613b10b4634555af1a85303fe153e9.html">Concept
+											- YouTube Music Play Icon</a></figure>
+									<figure id="7eaeea12-2688-459f-b2d0-1a45bf82c92a" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Branding%20-%20Under%20Construction%207eaeea122688459fb2d01a45bf82c92a.html">Branding
+											- Under Construction</a></figure>
+								</details>
+							</li>
+						</ul>
+						<ul id="75f991f6-288f-41e5-be7e-48dfe645262a" class="toggle">
+							<li>
+								<details open="">
+									<summary>February</summary>
+									<figure id="55845c87-0238-4df8-9c39-4092f52d6dd6" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20BigSurCenter%20Revisited%2055845c8702384df89c394092f52d6dd6.html">Concept
+											- BigSurCenter Revisited</a></figure>
+									<figure id="fd141a3f-b2df-4fce-992a-7558bf08a4e5" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20macOS%20Drops%20fd141a3fb2df4fce992a7558bf08a4e5.html">Concept
+											- macOS Drops</a></figure>
+								</details>
+							</li>
+						</ul>
+						<ul id="796502bb-08c7-4dfd-9ac3-ff31e0505711" class="toggle">
+							<li>
+								<details open="">
+									<summary>March</summary>
+									<figure id="10135ff6-e942-43b8-9aa2-db42eb8c9b14" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Redesign%20-%20Snazzy%20Labs%2010135ff6e94243b89aa2db42eb8c9b14.html">Redesign
+											- Snazzy Labs</a></figure>
+									<figure id="83fc4d36-54dc-44e0-9970-72eedb770910" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Icon%20-%20BigSurCenter%2083fc4d3654dc44e0997072eedb770910.html">Icon
+											- BigSurCenter</a></figure>
+								</details>
+							</li>
+						</ul>
+						<ul id="ee9d7a28-242b-44cf-ac23-48e1b40a867f" class="toggle">
+							<li>
+								<details open="">
+									<summary>April</summary>
+									<figure id="b13e1048-5c0d-421a-967f-36613dbac45e" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Branding%20-%20April%20Update%20b13e10485c0d421a967f36613dbac45e.html">Branding
+											- April Update</a></figure>
+								</details>
+							</li>
+						</ul>
+						<ul id="978e96e6-10f4-4fa7-b771-2988c9f5f266" class="toggle">
+							<li>
+								<details open="">
+									<summary>June</summary>
+									<figure id="68ec0aec-3a8e-4c3b-b473-68b32b98cb2b" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Branding%20-%2021H2%20Update%2068ec0aec3a8e4c3bb47368b32b98cb2b.html">Branding
+											- 21H2 Update</a></figure>
+								</details>
+							</li>
+						</ul>
+						<ul id="37678c0e-731b-42c5-8939-e41c3d7a13a1" class="toggle">
+							<li>
+								<details open="">
+									<summary>August</summary>
+									<figure id="849d88b6-3ed6-4176-b811-b8348dfe92af" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Wallpaper%20-%20Hero11%20849d88b63ed64176b811b8348dfe92af.html">Wallpaper
+											- Hero11</a></figure>
+								</details>
+							</li>
+						</ul>
+					</details>
+				</li>
+			</ul>
+			<ul id="e8d5cc81-4fe5-460f-b13d-e0d39b8d2680" class="toggle">
+				<li>
+					<details open="">
+						<summary><strong>2020 - “Futur3Sn0w”</strong></summary>
+						<ul id="3859360f-850f-4191-836e-bbb22b772d8b" class="toggle">
+							<li>
+								<details open="">
+									<summary>January</summary>
+									<figure id="ac01c515-b654-4ce4-b10d-33d81c91ff6a" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Project%20-%20Neumorphic%20Branding%20ac01c515b6544ce4b10d33d81c91ff6a.html">Project
+											- Neumorphic Branding</a></figure>
+									<figure id="33d0aa64-a685-4632-b901-024020ea31a4" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Project%20-%20Windows%2010X%20Folder%20Icons%2033d0aa64a6854632b901024020ea31a4.html">Project
+											- Windows 10X Folder Icons</a></figure>
+									<figure id="8c79bef0-9db8-4a6e-935e-8dc5b0f4dd7b" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Experiment%20-%20Brand%20Font%20Sheet(s)%208c79bef09db84a6e935e8dc5b0f4dd7b.html">Experiment
+											- Brand Font Sheet(s)</a></figure>
+									<figure id="c34fa8cd-f675-4aa4-8fd6-9c20e0337c8a" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Redesign%20-%20Announcement%20Preview%20Graphics%20c34fa8cdf6754aa48fd69c20e0337c8a.html">Redesign
+											- Announcement/Preview Graphics</a></figure>
+								</details>
+							</li>
+						</ul>
+						<ul id="4061e6d2-966b-4d56-8593-6e511e3e1130" class="toggle">
+							<li>
+								<details open="">
+									<summary>February</summary>
+									<figure id="784ef804-09f8-4bb7-8723-0e11d147496e" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20Notification%20Center%20for%20iPads%20784ef80409f84bb787230e11d147496e.html">Concept
+											- Notification Center for iPads</a></figure>
+								</details>
+							</li>
+						</ul>
+						<ul id="3fc45736-4796-4c62-998d-d01be2d99ebc" class="toggle">
+							<li>
+								<details open="">
+									<summary>March</summary>
+									<figure id="45d14729-e893-46f0-b8f0-9655aee2ed4c" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20Fluent%20Security%20Options%2045d14729e89346f0b8f09655aee2ed4c.html">Concept
+											- Fluent Security Options</a></figure>
+									<figure id="9b5379e4-045c-4554-88f4-ebded3b2055d" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Wallpaper%20-%20Windows%2010X%20Hero%209b5379e4045c455488f4ebded3b2055d.html">Wallpaper
+											- Windows 10X Hero</a></figure>
+									<figure id="dfa7e855-4e73-4c22-86ea-5b004596b4d7" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20Fluent%20New%20Tab%20Page%20dfa7e8554e734c2286ea5b004596b4d7.html">Concept
+											- Fluent New Tab Page</a></figure>
+								</details>
+							</li>
+						</ul>
+						<ul id="e8ac3aa3-aa7f-4ffe-81e9-a2bc78d10165" class="toggle">
+							<li>
+								<details open="">
+									<summary>April</summary>
+									<figure id="1d149085-c2b0-4581-969c-870d2b52b116" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20%E2%80%9CDuoX%20Mobile%20Revisited%20-%20Notifications%E2%80%9D%201d149085c2b04581969c870d2b52b116.html">Concept
+											- “DuoX Mobile Revisited - Notifications”</a></figure>
+									<figure id="363280b7-bcd9-4eab-a08a-8107c8576d2c" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20Fluent%20BSOD%20363280b7bcd94eaba08a8107c8576d2c.html">Concept
+											- Fluent BSOD</a></figure>
+									<figure id="9e01d02d-d9bc-46e0-9429-53ac41fa5b6b" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20Google%20Assistant%20on%20Windows%209e01d02dd9bc46e0942953ac41fa5b6b.html">Concept
+											- Google Assistant on Windows</a></figure>
+									<figure id="daff9ac6-9008-4baf-8c26-2d88c638e23b" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Project%20-%20%E2%80%9CModernButtons%E2%80%9D%20daff9ac690084baf8c262d88c638e23b.html">Project
+											- “ModernButtons”</a></figure>
+									<figure id="38d1e299-7e53-4014-95ee-c77176c80afe" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20Microsoft%20Signup%2038d1e2997e53401495eec77176c80afe.html">Concept
+											- Microsoft Signup</a></figure>
+									<figure id="148e30c3-4921-4322-9c33-d844a527775c" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Experiment%20-%20Fluent%20Design%20in%20Photoshop%20148e30c3492143229c33d844a527775c.html">Experiment
+											- Fluent Design in Photoshop</a></figure>
+								</details>
+							</li>
+						</ul>
+						<ul id="da072d80-9ae8-48d0-b540-90b98a0c731f" class="toggle">
+							<li>
+								<details open="">
+									<summary>May</summary>
+									<figure id="75e1e796-dbf9-478f-931f-4625aff8d07b" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Wallpaper%20-%20%E2%80%9CMicrosoft%20Mountains%E2%80%9D%2075e1e796dbf9478f931f4625aff8d07b.html">Wallpaper
+											- “Microsoft Mountains”</a></figure>
+									<figure id="f1b1e9ca-fad3-41b6-a3a3-4647cc050d95" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20Nest%20Hub%20Mini%20Now%20Playing%20UI%20f1b1e9cafad341b6a3a34647cc050d95.html">Concept
+											- Nest Hub Mini Now Playing UI</a></figure>
+								</details>
+							</li>
+						</ul>
+						<ul id="0b74c5f9-9901-4139-ba66-eccea9481e9d" class="toggle">
+							<li>
+								<details open="">
+									<summary>June</summary>
+									<figure id="b9b7d261-807c-452e-b1fe-fa2ad6df8de3" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20BigSurCenter%20b9b7d261807c452eb1fefa2ad6df8de3.html">Concept
+											- BigSurCenter</a></figure>
+								</details>
+							</li>
+						</ul>
+						<ul id="f4298551-3eb9-4543-b5c3-9302b35c4a22" class="toggle">
+							<li>
+								<details open="">
+									<summary>July</summary>
+									<figure id="8ce4c824-fe76-43ad-b53e-3fcaa0edd352" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20Fluent%20Context%20Menus%208ce4c824fe7643adb53e3fcaa0edd352.html">Concept
+											- Fluent Context Menus</a></figure>
+									<figure id="4283dd14-7a1d-4343-9bd0-cb017a44cb4f" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20Fluent%20Microsoft%20Edge%204283dd147a1d43439bd0cb017a44cb4f.html">Concept
+											- Fluent Microsoft Edge</a></figure>
+									<figure id="ff6bdcf9-df43-4936-94da-240248022e57" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Redesign%20-%20Google%20Chrome%20Icons%20ff6bdcf9df43493694da240248022e57.html">Redesign
+											- Google Chrome Icons</a></figure>
+									<figure id="1660214f-1977-4cfe-82a6-b4ec4802486b" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20Windows%20Smart%20Home%20Display%201660214f19774cfe82a6b4ec4802486b.html">Concept
+											- Windows Smart Home Display</a></figure>
+								</details>
+							</li>
+						</ul>
+						<ul id="69eec23e-872f-4029-9e5a-0f67704142f8" class="toggle">
+							<li>
+								<details open="">
+									<summary>August</summary>
+									<figure id="e993db72-e869-4d54-a977-6d5376530a7e" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Redesign%20-%20Cortana%20Icon%20e993db72e8694d54a9776d5376530a7e.html">Redesign
+											- Cortana Icon</a></figure>
+									<figure id="ac5054c1-15f5-405b-b0e0-29f622fc068c" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20Aero%20Windows%2010%20Start%20Menu%20ac5054c115f5405bb0e029f622fc068c.html">Concept
+											- Aero Windows 10 Start Menu</a></figure>
+								</details>
+							</li>
+						</ul>
+						<ul id="da9c4579-f6c8-4042-96b5-19768ce4668f" class="toggle">
+							<li>
+								<details open="">
+									<summary>September</summary>
+									<figure id="2e94576f-214a-4e38-a831-d9a0a8cd1d47" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Project%20-%20FluentRounds%202e94576f214a4e38a831d9a0a8cd1d47.html">Project
+											- FluentRounds</a></figure>
+									<figure id="556f7d08-6c59-4c6b-a3d3-33fd4ab237af" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Project%20-%20Modern7%20Orb%20556f7d086c594c6ba3d333fd4ab237af.html">Project
+											- Modern7 Orb</a></figure>
+								</details>
+							</li>
+						</ul>
+						<ul id="7e8623d9-9686-49c5-a601-88a8f999aa0a" class="toggle">
+							<li>
+								<details open="">
+									<summary>October</summary>
+									<figure id="a650e242-bfee-4b7e-8b89-3bfa2fd56135" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20Apple%20Search%20a650e242bfee4b7e8b893bfa2fd56135.html">Concept
+											- Apple Search</a></figure>
+									<figure id="9df4942c-580d-4490-9073-6a579f8fd051" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20Microsoft%20OS%209df4942c580d449090736a579f8fd051.html">Concept
+											- Microsoft OS</a></figure>
+								</details>
+							</li>
+						</ul>
+						<ul id="83c79c3d-a193-42d9-9279-1f0fa04d665f" class="toggle">
+							<li>
+								<details open="">
+									<summary>November</summary>
+									<figure id="84b23661-009a-4c96-99ba-65feb742f7af" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Project%20-%2010XinHTML%2084b23661009a4c9699ba65feb742f7af.html">Project
+											- 10XinHTML</a></figure>
+								</details>
+							</li>
+						</ul>
+						<ul id="6750e2bd-19ee-476b-bc6b-b9cb5bea1cef" class="toggle">
+							<li>
+								<details open="">
+									<summary>December</summary>
+									<figure id="9cca866e-27a0-4650-9f70-58f7fbb37382" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20watchOS%208%209cca866e27a046509f7058f7fbb37382.html">Concept
+											- watchOS 8</a></figure>
+								</details>
+							</li>
+						</ul>
+					</details>
+				</li>
+			</ul>
+			<ul id="b5fd8047-7db5-4d17-a163-c5e157ffe763" class="toggle">
+				<li>
+					<details open="">
+						<summary><strong>2019 - “Futur3Sn0w”</strong></summary>
+						<ul id="c8f82b90-4e09-4a7a-8f78-094aa3600ac5" class="toggle">
+							<li>
+								<details open="">
+									<summary>April</summary>
+									<figure id="ff504a77-f8e7-445a-88c7-21f1bff571d7" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Project%20-%20%E2%80%9CTilt%20Icon%20Pack%20for%20macOS%E2%80%9D%20ff504a77f8e7445a88c721f1bff571d7.html">Project
+											- “Tilt Icon Pack for macOS”</a></figure>
+									<figure id="d6928523-07c7-4f55-931a-0df64228a165" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Wallpaper%20-%20%E2%80%9CBubbles%E2%80%9D%20d692852307c74f55931a0df64228a165.html">Wallpaper
+											- “Bubbles”</a></figure>
+								</details>
+							</li>
+						</ul>
+						<ul id="8836f01f-3612-42aa-b4cd-4673b3741551" class="toggle">
+							<li>
+								<details open="">
+									<summary>May</summary>
+									<figure id="6950c4e6-7138-4149-b677-790f645954ef" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Icon%20Redesign%20-%20iOS%20Icons%206950c4e671384149b677790f645954ef.html">Icon
+											Redesign - iOS Icons</a></figure>
+								</details>
+							</li>
+						</ul>
+						<ul id="387e7e7d-aa10-4002-9807-d39bd5236742" class="toggle">
+							<li>
+								<details open="">
+									<summary>June</summary>
+									<figure id="8f885cfd-a153-48ec-9b04-8be5f9ff6be8" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Promo%20-%20800%20Followers%208f885cfda15348ec9b048be5f9ff6be8.html">Promo
+											- 800 Followers</a></figure>
+									<figure id="b39506f4-c92f-44e8-87ed-6378a428aa02" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20iOS%2013%20Volume%20Slider%20b39506f4c92f44e887ed6378a428aa02.html">Concept
+											- iOS 13 Volume Slider</a></figure>
+									<figure id="634e76f7-b689-48d6-a409-10228341399b" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20iOS%2013%20Lockscreen%20Hub%20634e76f7b68948d6a40910228341399b.html">Concept
+											- iOS 13 Lockscreen Hub</a></figure>
+									<figure id="8476eb86-e3e2-4356-8ccb-7bd3f3459aed" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Promo%20-%20700%20Followers%208476eb86e3e243568ccb7bd3f3459aed.html">Promo
+											- 700 Followers</a></figure>
+									<figure id="17c89645-d146-4a44-b313-612be5dda924" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Promo%20-%20900%20Followers%2017c89645d1464a44b313612be5dda924.html">Promo
+											- 900 Followers</a></figure>
+								</details>
+							</li>
+						</ul>
+						<ul id="266ad5ba-d800-4405-a4af-38fd744e6ac2" class="toggle">
+							<li>
+								<details open="">
+									<summary>August</summary>
+									<figure id="772b5bd9-3255-40db-9069-9e350799e4ab" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20%E2%80%9CMicrosoft%20Desktop%E2%80%9D%20772b5bd9325540db90699e350799e4ab.html">Concept
+											- “Microsoft Desktop”</a></figure>
+									<figure id="a83688d0-41a0-4b9f-ba3f-3531bec63b59" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Project%20-%20%E2%80%9CPostModern%20-%20Home%20screen%E2%80%9D%20a83688d041a04b9fba3f3531bec63b59.html">Project
+											- “PostModern - Home screen”</a></figure>
+									<figure id="54aa7385-f045-4bd1-9aa2-2fcac4b47cdf" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Project%20-%20%E2%80%9CPostModern%20-%20AOD%E2%80%9D%2054aa7385f0454bd19aa22fcac4b47cdf.html">Project
+											- “PostModern - AOD”</a></figure>
+									<figure id="225955f2-4df9-434d-9145-373e81a2acef" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Project%20-%20%E2%80%9CPostModern%20-%20Lock%20screen%E2%80%9D%20225955f24df9434d9145373e81a2acef.html">Project
+											- “PostModern - Lock screen”</a></figure>
+								</details>
+							</li>
+						</ul>
+						<ul id="66921671-c47d-433d-9a28-8abb456c9549" class="toggle">
+							<li>
+								<details open="">
+									<summary>September</summary>
+									<figure id="d4c719e6-1f40-4ff9-8e15-aaacb2882450" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Project%20-%20Project1080%20d4c719e61f404ff98e15aaacb2882450.html">Project
+											- Project1080</a></figure>
+									<figure id="7fedf71f-104e-41fb-85fc-081f8fb41d98" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Digital%20Design%20-%209%2011%20Poster%207fedf71f104e41fb85fc081f8fb41d98.html">Digital
+											Design - 9/11 Poster</a></figure>
+								</details>
+							</li>
+						</ul>
+						<ul id="d154c54d-a861-49c8-903c-88001baafa74" class="toggle">
+							<li>
+								<details open="">
+									<summary>October</summary>
+									<figure id="b73f3f07-a07b-4869-9648-8808e3633b21" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20%E2%80%9CIf%20Apple%20Bought%20Spotify%E2%80%9D%20b73f3f07a07b486996488808e3633b21.html">Concept
+											- “If Apple Bought Spotify”</a></figure>
+									<figure id="8b6ba08b-bf26-4cb1-869b-007a2e866d70" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20%E2%80%9CReAssist%E2%80%9D%208b6ba08bbf264cb1869b007a2e866d70.html">Concept
+											- “ReAssist”</a></figure>
+								</details>
+							</li>
+						</ul>
+						<ul id="272e8bf6-7c72-490d-a637-f611c8f4ce86" class="toggle">
+							<li>
+								<details open="">
+									<summary>December</summary>
+									<figure id="754fbca0-0256-477f-9f9a-5f03a59c5a02" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20%E2%80%9CDuoX%20Phone%E2%80%9D%20754fbca00256477f9f9a5f03a59c5a02.html">Concept
+											- “DuoX Phone”</a></figure>
+									<figure id="7aeb9ec9-5610-4dda-96df-1fe06d03993c" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20Fluent%20Design%20Settings%207aeb9ec956104dda96df1fe06d03993c.html">Concept
+											- Fluent Design Settings</a></figure>
+								</details>
+							</li>
+						</ul>
+					</details>
+				</li>
+			</ul>
+			<ul id="3064b193-cd1b-43c6-934a-3b5b3b56daad" class="toggle">
+				<li>
+					<details open="">
+						<summary><strong>2018 - “TechKnow Studio”</strong></summary>
+						<ul id="08756f2b-458b-43a1-986f-b0da95a48d98" class="toggle">
+							<li>
+								<details open="">
+									<summary>April</summary>
+									<figure id="6b64d76a-4dde-4d3f-8b9e-7541e29c59ce" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Remake%20-%20Windows%2010%20BSOD%206b64d76a4dde4d3f8b9e7541e29c59ce.html">Remake
+											- Windows 10 BSOD</a></figure>
+								</details>
+							</li>
+						</ul>
+						<ul id="183f3a36-239c-4a10-ac2b-40b59de4029f" class="toggle">
+							<li>
+								<details open="">
+									<summary>July</summary>
+									<figure id="26c8b178-843a-48d1-a9de-5306d2de2591" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Concept%20-%20Retro%20Music%20for%20iOS%2026c8b178843a48d1a9de5306d2de2591.html">Concept
+											- Retro Music for iOS</a></figure>
+								</details>
+							</li>
+						</ul>
+						<ul id="f376c4b4-1352-4f68-940a-8c784fda0edf" class="toggle">
+							<li>
+								<details open="">
+									<summary>November</summary>
+									<figure id="3ab9f0fb-5f8c-45a3-af69-179425e28708" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Branding%20-%20November%202018%203ab9f0fb5f8c45a3af69179425e28708.html">Branding
+											- November 2018</a></figure>
+									<figure id="a8f71aa1-2f15-4ec5-8850-1b7f7c3f750c" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Redesign%20-%20Safari%20a8f71aa12f154ec588501b7f7c3f750c.html">Redesign
+											- Safari</a></figure>
+								</details>
+							</li>
+						</ul>
+						<ul id="848d44ca-111d-48df-bba9-061faef2467d" class="toggle">
+							<li>
+								<details open="">
+									<summary>December</summary>
+									<figure id="123d0504-621d-4a4f-bd67-b8b9c0bc4b0e" class="link-to-page"><a
+											href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Scrapped%20-%20%E2%80%9COutreach%E2%80%9D%20Icon%20123d0504621d4a4fbd67b8b9c0bc4b0e.html">Scrapped
+											- “Outreach” Icon</a></figure>
+								</details>
+							</li>
+						</ul>
+					</details>
+				</li>
+			</ul>
+			<hr id="83ab13f4-9fd8-4295-bcbd-c0f00bd04c18" />
+			<figure id="9d6960ca-7973-4879-aabb-8fe5ebc5e5ce" class="link-to-page"><a
+					href="(Beta)%20Portfolio%20e8d29cbe46c74c5696dceec0fd73a39a/Jailbreak%20Setups%209d6960ca79734879aabb8fe5ebc5e5ce.html">Jailbreak
+					Setups</a></figure>
+		</div>
+	</article>
+</body>
+
+</html>
